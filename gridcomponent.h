@@ -7,6 +7,13 @@
 #include <QKeyEvent>
 #include "gridcell.h"
 
+enum class GameMode {
+    Playing,
+    SolvingPreparation,
+    SolvingProcess,
+    SolvingDone,
+};
+
 class GridComponent : public QWidget
 {
     Q_OBJECT
@@ -24,6 +31,8 @@ protected:
 private:
     int sideCellsCount = 4;
     GridCell* selectedCell = nullptr;
+    GameMode gameMode = GameMode::SolvingPreparation;
+    bool tellIfCellCandidateForSelection(GridCellId id);
     QVector<QVector<GridCell *> *> *gameCells = nullptr;
     QVector<GridCell *> *topCluesCells = nullptr; // from left to right
     QVector<GridCell *> *bottomCluesCells = nullptr; // from left to right

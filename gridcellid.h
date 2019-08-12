@@ -1,7 +1,7 @@
 #ifndef GRIDCELLID_H
 #define GRIDCELLID_H
 
-enum GridCellIdType {
+enum class GridCellIdType {
     ClueTop,
     ClueBottom,
     ClueLeft,

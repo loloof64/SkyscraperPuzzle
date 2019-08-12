@@ -117,6 +117,9 @@ void GridComponent::cleanUpCells()
 
 void GridComponent::updateSelectedCell(GridCellId id)
 {
+    bool isValidCellType = tellIfCellCandidateForSelection(id);
+    if (! isValidCellType) return;
+
     GridCell *referencedCell = findReferenceCell(id);
 
     if (this->selectedCell != nullptr)
@@ -131,6 +134,18 @@ void GridComponent::updateSelectedCell(GridCellId id)
     }
 }
 
+bool GridComponent::tellIfCellCandidateForSelection(GridCellId id)
+{
+    switch (this->gameMode) {
+        case GameMode::Playing:
+            return id.getType() == GridCellIdType::Game;
+        case GameMode::SolvingPreparation:
+            return id.getType() != GridCellIdType::Game;
+    default:
+        return false;
+    }
+}
+
 GridCell* GridComponent::findReferenceCell(GridCellId id) const
 {
     GridCell* reference = nullptr;
@@ -139,7 +154,7 @@ GridCell* GridComponent::findReferenceCell(GridCellId id) const
 
     switch (id.getType())
     {
-        case Game:
+        case GridCellIdType::Game:
             maxId = (this->sideCellsCount * this->sideCellsCount) - 1;
             if (idNumber >= 0 && idNumber <= maxId)
             {
@@ -149,28 +164,28 @@ GridCell* GridComponent::findReferenceCell(GridCellId id) const
                 reference = (*(*this->gameCells)[line])[column];
             }
         break;
-        case ClueTop:
+        case GridCellIdType::ClueTop:
             maxId = this->sideCellsCount - 1;
             if (idNumber >= 0 && idNumber <= maxId)
             {
                 reference = (*this->topCluesCells)[idNumber];
             }
         break;
-        case ClueBottom:
+        case GridCellIdType::ClueBottom:
             maxId = this->sideCellsCount - 1;
             if (idNumber >= 0 && idNumber <= maxId)
             {
                 reference = (*this->bottomCluesCells)[idNumber];
             }
         break;
-        case ClueLeft:
+        case GridCellIdType::ClueLeft:
            maxId = this->sideCellsCount - 1;
            if (idNumber >= 0 && idNumber <= maxId)
            {
                reference = (*this->leftCluesCells)[idNumber];
            }
         break;
-        case ClueRight:
+        case GridCellIdType::ClueRight:
             maxId = this->sideCellsCount - 1;
             if (idNumber >= 0 && idNumber <= maxId)
             {
