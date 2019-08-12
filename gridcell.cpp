@@ -33,17 +33,27 @@ void GridCell::paintEvent(QPaintEvent *event)
 
 void GridCell::updateValue(int value)
 {
-    if (value < 1 || value > 9) return;
+    auto validValue =
+            (this->id.getType() == GridCellIdType::Game &&
+             value > 0 && value < 10) ||
+            (value >= 0 && value < 10);
+    if (!validValue) return;
     if (this->id.getType() != GridCellIdType::Game)
     {
         this->values.clear();
-    }
-    if (this->values.contains(value))
-    {
-        this->values.remove(value);
+        // A value of 0 must leave cell empty : it is eraser value
+        if (value > 0) {
+           this->values.insert(value);
+        }
     }
     else {
-        this->values.insert(value);
+        if (this->values.contains(value))
+        {
+            this->values.remove(value);
+        }
+        else {
+            this->values.insert(value);
+        }
     }
     this->update();
 }

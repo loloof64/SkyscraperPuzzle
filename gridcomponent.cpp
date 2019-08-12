@@ -185,7 +185,7 @@ void GridComponent::keyReleaseEvent(QKeyEvent *event)
     if (this->selectedCell == nullptr) return;
     int key = event->key();
 
-    bool isValidKey = key >= Qt::Key::Key_1 && key <= Qt::Key::Key_9;
+    bool isValidKey = key >= Qt::Key::Key_0 && key <= Qt::Key::Key_9;
     if (isValidKey)
     {
         GridCell *referencedCell = findReferenceCell(this->selectedCell->getId());
