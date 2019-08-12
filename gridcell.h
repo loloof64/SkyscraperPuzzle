@@ -1,22 +1,32 @@
 #ifndef GRIDCELL_H
 #define GRIDCELL_H
 
+#include "gridcellid.h"
 #include <QWidget>
+#include <QSet>
 
 const int SIZE = 50;
 
-class Gridcell : public QWidget
+class GridCell : public QWidget
 {
     Q_OBJECT
 public:
-    explicit Gridcell(QWidget *parent = nullptr);
+    explicit GridCell(GridCellId id, QWidget *parent = nullptr);
+    void updateSelectStatus(bool newStatus);
+    void addValue(int value);
 
 signals:
+    void notifyCellSelected(GridCellId id);
 
-public slots:
+protected:
+    QSize sizeHint() const override;
+    void paintEvent(QPaintEvent* event) override;
+    void mouseReleaseEvent(QMouseEvent* event) override;
+
 private:
-    QSize sizeHint() const;
-    void paintEvent(QPaintEvent* event);
+    bool selected = false;
+    QSet<int> values;
+    GridCellId id;
 };
 
 #endif // GRIDCELL_H
