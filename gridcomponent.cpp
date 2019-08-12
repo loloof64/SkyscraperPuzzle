@@ -3,8 +3,9 @@
 GridComponent::GridComponent(QWidget *parent) : QWidget(parent)
 {
     this->layout = new QGridLayout();
-    setLayout(this->layout);
+    this->setLayout(this->layout);
     this->initializeCells();
+    this->setSizePolicy(QSizePolicy(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Preferred));
 }
 
 GridComponent::~GridComponent()

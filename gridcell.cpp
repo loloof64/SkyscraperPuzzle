@@ -4,7 +4,7 @@
 
 Gridcell::Gridcell(QWidget *parent) : QWidget(parent)
 {
-
+    this->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
 }
 
 QSize Gridcell::sizeHint() const {
