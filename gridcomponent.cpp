@@ -7,6 +7,7 @@ GridComponent::GridComponent(QWidget *parent) : QWidget(parent)
     this->setLayout(this->layout);
     this->initializeCells();
     this->setSizePolicy(QSizePolicy(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Preferred));
+    this->grabKeyboard();
 }
 
 GridComponent::~GridComponent()
@@ -177,4 +178,19 @@ GridCell* GridComponent::findReferenceCell(GridCellId id) const
             }
         }
     return reference;
+}
+
+void GridComponent::keyReleaseEvent(QKeyEvent *event)
+{
+    if (this->selectedCell == nullptr) return;
+    int key = event->key();
+
+    bool isValidKey = key >= Qt::Key::Key_1 && key <= Qt::Key::Key_9;
+    if (isValidKey)
+    {
+        GridCell *referencedCell = findReferenceCell(this->selectedCell->getId());
+        int value = key - Qt::Key::Key_0;
+
+        referencedCell->updateValue(value);
+    }
 }

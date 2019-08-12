@@ -13,7 +13,8 @@ class GridCell : public QWidget
 public:
     explicit GridCell(GridCellId id, QWidget *parent = nullptr);
     void updateSelectStatus(bool newStatus);
-    void addValue(int value);
+    void updateValue(int value);
+    GridCellId getId() const;
 
 signals:
     void notifyCellSelected(GridCellId id);
@@ -27,6 +28,7 @@ private:
     bool selected = false;
     QSet<int> values;
     GridCellId id;
+    void drawValues();
 };
 
 #endif // GRIDCELL_H

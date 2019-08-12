@@ -4,6 +4,7 @@
 #include <QVector>
 #include <QWidget>
 #include <QGridLayout>
+#include <QKeyEvent>
 #include "gridcell.h"
 
 class GridComponent : public QWidget
@@ -16,8 +17,12 @@ public:
 public slots:
     void updateSelectedCell(GridCellId id);
 
+protected:
+    QSize sizeHint() const override;
+    void keyReleaseEvent(QKeyEvent *event) override;
+
 private:
-    int sideCellsCount = 5;
+    int sideCellsCount = 4;
     GridCell* selectedCell = nullptr;
     QVector<QVector<GridCell *> *> *gameCells = nullptr;
     QVector<GridCell *> *topCluesCells = nullptr; // from left to right
@@ -25,7 +30,6 @@ private:
     QVector<GridCell *> *leftCluesCells = nullptr; // from top to bottom
     QVector<GridCell *> *rightCluesCells = nullptr; // from top to bottom
     QGridLayout *layout = nullptr;
-    QSize sizeHint() const override;
     void initializeCells();
     void cleanUpCells();
     GridCell *findReferenceCell(GridCellId id) const;
