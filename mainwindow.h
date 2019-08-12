@@ -1,8 +1,9 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "gridcomponent.h"
+#include "centralwidget.h"
 #include <QMainWindow>
+#include <QAction>
 
 namespace Ui {
 class MainWindow;
@@ -16,9 +17,12 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void configureSolverGrid4x4();
+
 private:
     Ui::MainWindow *ui;
-    GridComponent *gridComponent;
+    CentralWidget *centralWidget;
 };
 
 #endif // MAINWINDOW_H

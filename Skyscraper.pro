@@ -25,6 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        centralwidget.cpp \
         gridcell.cpp \
         gridcellid.cpp \
         gridcomponent.cpp \
@@ -32,6 +33,7 @@ SOURCES += \
         mainwindow.cpp
 
 HEADERS += \
+        centralwidget.h \
         gridcell.h \
         gridcellid.h \
         gridcomponent.h \

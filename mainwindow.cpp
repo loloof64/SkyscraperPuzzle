@@ -6,12 +6,19 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    gridComponent = new GridComponent(this);
-    this->setCentralWidget(gridComponent);
+    this->centralWidget = new CentralWidget();
+    this->setCentralWidget(this->centralWidget);
+
+    QObject::connect(this->ui->actionGrid_4x4, SIGNAL(triggered()), this, SLOT(configureSolverGrid4x4()));
 }
 
 MainWindow::~MainWindow()
 {
-    delete gridComponent;
-    delete ui;
+    delete this->centralWidget;
+    delete this->ui;
+}
+
+void MainWindow::configureSolverGrid4x4()
+{
+    this->centralWidget->configureSolverGrid4x4();
 }

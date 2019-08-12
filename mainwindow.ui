@@ -23,16 +23,25 @@
      <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuJouer">
+    <property name="title">
+     <string>Play</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuSolve">
+    <property name="title">
+     <string>Solve</string>
+    </property>
+    <addaction name="actionGrid_4x4"/>
+   </widget>
+   <addaction name="menuJouer"/>
+   <addaction name="menuSolve"/>
   </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-  </widget>
-  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionGrid_4x4">
+   <property name="text">
+    <string>Grid 4x4</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

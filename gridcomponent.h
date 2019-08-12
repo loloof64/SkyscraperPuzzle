@@ -20,9 +20,11 @@ class GridComponent : public QWidget
 public:
     explicit GridComponent(QWidget *parent = nullptr);
     ~GridComponent() override;
+    void configureAsSolver(int size);
 
 public slots:
     void updateSelectedCell(GridCellId id);
+    void solve();
 
 protected:
     QSize sizeHint() const override;

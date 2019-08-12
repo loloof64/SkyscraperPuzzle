@@ -209,3 +209,22 @@ void GridComponent::keyReleaseEvent(QKeyEvent *event)
         referencedCell->updateValue(value);
     }
 }
+
+void GridComponent::configureAsSolver(int size)
+{
+    bool isValidSize = size >= 4 && size <= 9;
+    if (! isValidSize) return;
+    this->gameMode = GameMode::SolvingPreparation;
+    this->sideCellsCount = size;
+    this->update();
+}
+
+void GridComponent::solve()
+{
+    if (this->gameMode != GameMode::SolvingPreparation) return;
+
+    //////////////////////////////
+    QMessageLogger logger;
+    logger.debug("Starting to solve");
+    ///////////////////////////////
+}
