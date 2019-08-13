@@ -113,3 +113,8 @@ void GridCell::drawValues()
     painter.drawText(QPoint(8, 16), group1Str);
     painter.drawText(QPoint(8, 36), group2Str);
 }
+
+QSet<int> GridCell::getValues() const
+{
+    return this->values;
+}

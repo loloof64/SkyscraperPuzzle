@@ -15,6 +15,7 @@ public:
     void updateSelectStatus(bool newStatus);
     void updateValue(int value);
     GridCellId getId() const;
+    QSet<int> getValues() const;
 
 signals:
     void notifyCellSelected(GridCellId id);

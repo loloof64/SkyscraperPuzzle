@@ -29,6 +29,7 @@ SOURCES += \
         src/gridcell.cpp \
         src/gridcellid.cpp \
         src/gridcomponent.cpp \
+        src/gridsolver.cpp \
         src/main.cpp \
         src/mainwindow.cpp
 
@@ -37,6 +38,7 @@ HEADERS += \
         src/gridcell.h \
         src/gridcellid.h \
         src/gridcomponent.h \
+        src/gridsolver.h \
         src/mainwindow.h
 
 FORMS += \

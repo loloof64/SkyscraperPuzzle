@@ -6,6 +6,7 @@
 #include <QGridLayout>
 #include <QKeyEvent>
 #include "gridcell.h"
+#include "gridsolver.h"
 
 enum class GameMode {
     Playing,
@@ -32,7 +33,8 @@ protected:
 
 private:
     int sideCellsCount = 4;
-    GridCell* selectedCell = nullptr;
+    GridCell *selectedCell = nullptr;
+    GridSolver *solver = nullptr;
     GameMode gameMode = GameMode::SolvingPreparation;
     bool tellIfCellCandidateForSelection(GridCellId id);
     QVector<QVector<GridCell *> *> *gameCells = nullptr;
@@ -44,6 +46,7 @@ private:
     void initializeCells();
     void cleanUpCells();
     GridCell *findReferenceCell(GridCellId id) const;
+    QVector<int> getDigitsFromCells(QVector<GridCell *> *cellsLine) const;
 };
 
 #endif // GRIDCOMPONENT_H

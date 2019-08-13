@@ -1,5 +1,6 @@
 #include "gridcomponent.h"
 #include "gridcellid.h"
+#include <QMessageBox>
 
 GridComponent::GridComponent(QWidget *parent) : QWidget(parent)
 {
@@ -7,11 +8,13 @@ GridComponent::GridComponent(QWidget *parent) : QWidget(parent)
     this->setLayout(this->layout);
     this->initializeCells();
     this->setSizePolicy(QSizePolicy(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Preferred));
+    this->solver = new GridSolver();
     this->grabKeyboard();
 }
 
 GridComponent::~GridComponent()
 {
+    delete this->solver;
     this->cleanUpCells();
     delete this->layout;
 }
@@ -229,4 +232,38 @@ void GridComponent::solve()
         this->selectedCell = nullptr;
     }
     this->gameMode = GameMode::SolvingProcess;
+
+    this->solver->setParameters(
+        this->sideCellsCount,
+        this->getDigitsFromCells(this->topCluesCells),
+        this->getDigitsFromCells(this->bottomCluesCells),
+        this->getDigitsFromCells(this->leftCluesCells),
+        this->getDigitsFromCells(this->rightCluesCells)
+    );
+
+    bool success = this->solver->solve();
+    if ( ! success )
+    {
+        QMessageBox::critical(this->parentWidget(), tr("Failure"), tr("Failed to solve the grid"));
+    }
+}
+
+QVector<int> GridComponent::getDigitsFromCells(QVector<GridCell *> *cellsLine) const
+{
+    QVector<int> result;
+
+    for (auto it = cellsLine->begin(); it != cellsLine->end(); it++)
+    {
+        GridCell *currentCell(*it);
+        QSet<int> currentCellValues(currentCell->getValues());
+
+        assert(currentCellValues.size() <= 1);
+
+        int clueValue = 0;
+        if (currentCellValues.size() > 0) clueValue = currentCellValues.toList()[0];
+
+        result.push_back(clueValue);
+    }
+
+    return result;
 }
