@@ -223,8 +223,10 @@ void GridComponent::solve()
 {
     if (this->gameMode != GameMode::SolvingPreparation) return;
 
-    //////////////////////////////
-    QMessageLogger logger;
-    logger.debug("Starting to solve");
-    ///////////////////////////////
+    if (this->selectedCell != nullptr)
+    {
+        this->selectedCell->updateSelectStatus(false);
+        this->selectedCell = nullptr;
+    }
+    this->gameMode = GameMode::SolvingProcess;
 }

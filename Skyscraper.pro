@@ -25,22 +25,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        centralwidget.cpp \
-        gridcell.cpp \
-        gridcellid.cpp \
-        gridcomponent.cpp \
-        main.cpp \
-        mainwindow.cpp
+        src/centralwidget.cpp \
+        src/gridcell.cpp \
+        src/gridcellid.cpp \
+        src/gridcomponent.cpp \
+        src/main.cpp \
+        src/mainwindow.cpp
 
 HEADERS += \
-        centralwidget.h \
-        gridcell.h \
-        gridcellid.h \
-        gridcomponent.h \
-        mainwindow.h
+        src/centralwidget.h \
+        src/gridcell.h \
+        src/gridcellid.h \
+        src/gridcomponent.h \
+        src/mainwindow.h
 
 FORMS += \
-        mainwindow.ui
+        src/mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
