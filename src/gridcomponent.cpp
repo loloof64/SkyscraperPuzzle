@@ -244,7 +244,23 @@ void GridComponent::solve()
     bool success = this->solver->solve();
     if ( ! success )
     {
-        QMessageBox::critical(this->parentWidget(), tr("Failure"), tr("Failed to solve the grid"));
+        QMessageBox::critical(this->parentWidget(), tr("Failure"), tr("Failed to solve the grid."));
+    }
+    else
+    {
+        auto values = this->solver->getValues();
+        for (auto rowIt = values.begin(); rowIt != values.end(); rowIt++)
+        {
+            auto rowIndex = static_cast<int>(rowIt - values.begin());
+            for (auto colIt = rowIt->begin(); colIt != rowIt->end(); colIt++)
+            {
+                auto colIndex = static_cast<int>(colIt - rowIt->begin());
+                auto currentCell = (*(*this->gameCells)[rowIndex])[colIndex];
+                currentCell->updateValue(values[rowIndex][colIndex]);
+            }
+        }
+
+        QMessageBox::information(this->parentWidget(), tr("Success"), tr("Solved the grid."));
     }
 }
 
