@@ -32,3 +32,12 @@ void CentralWidget::configureSolverGrid4x4()
     this->gridComponent->setVisible(true);
     this->solveButton->setVisible(true);
 }
+
+
+void CentralWidget::configureSolverGrid5x5()
+{
+    this->gridComponent->configureAsSolver(5);
+    this->welcomeLabel->setVisible(false);
+    this->gridComponent->setVisible(true);
+    this->solveButton->setVisible(true);
+}

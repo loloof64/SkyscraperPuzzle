@@ -219,7 +219,8 @@ void GridComponent::configureAsSolver(int size)
     if (! isValidSize) return;
     this->gameMode = GameMode::SolvingPreparation;
     this->sideCellsCount = size;
-    this->update();
+    this->cleanUpCells();
+    this->initializeCells();
 }
 
 void GridComponent::solve()

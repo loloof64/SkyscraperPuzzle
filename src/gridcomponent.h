@@ -32,7 +32,7 @@ protected:
     void keyReleaseEvent(QKeyEvent *event) override;
 
 private:
-    int sideCellsCount = 4;
+    int sideCellsCount = 0;
     GridCell *selectedCell = nullptr;
     GridSolver *solver = nullptr;
     GameMode gameMode = GameMode::SolvingPreparation;

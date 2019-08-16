@@ -14,6 +14,7 @@ public:
     explicit CentralWidget(QWidget *parent = nullptr);
     ~CentralWidget() override;
     void configureSolverGrid4x4();
+    void configureSolverGrid5x5();
 
 signals:
 

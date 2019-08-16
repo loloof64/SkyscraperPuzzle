@@ -1,24 +1,6 @@
 #include "gridsolver.h"
 #include <QMap>
 
-/////////////////////////////////////
-void printGridState(QVector<QVector<int>> gridState)
-{
-    QString message(" | ");
-    for (auto rowIt = gridState.begin(); rowIt != gridState.end(); rowIt++)
-    {
-        for (auto colIt = rowIt->begin(); colIt != rowIt->end(); colIt++)
-        {
-            message.append(QString::number(*colIt));
-        }
-        message.append(" | ");
-    }
-
-    QMessageLogger logger;
-    logger.debug(message.toUtf8());
-}
-/////////////////////////////////////
-
 GridSolver::GridSolver()
 {
 
@@ -118,12 +100,6 @@ bool GridSolver::checkIfDigitAlreadyInLineOrColumn(const QVector<QVector<int>> &
 bool GridSolver::checkIfIsASolution(QVector<QVector<int>> gridState) const
 {
 
-    //////////////////////
-    printGridState(gridState);
-    QMessageLogger logger;
-    logger.debug("Top clues");
-    //////////////////////
-
     // Scannning top clues
     for (auto topClueIndex = 0; topClueIndex < size; topClueIndex++)
     {
@@ -138,27 +114,11 @@ bool GridSolver::checkIfIsASolution(QVector<QVector<int>> gridState) const
             matchingConfiguration.push_back(gridState[rowIndex][topClueIndex]);
         }
 
-        //////////////////////////
-        QMessageLogger logger;
-        QString message;
-        message.append(QString::number(currentClue));
-        message.append(" | ");
-        for (auto it = matchingConfiguration.begin(); it != matchingConfiguration.end(); it++)
-        {
-            message.append(QString::number(*it));
-        }
-        logger.debug(message.toUtf8());
-        //////////////////////////
-
         if ( ! checkIfGoodConfiguration(currentClue, matchingConfiguration) )
         {
             return false;
         }
     }
-
-    ///////////////////////////
-    logger.debug("Bottom clues");
-    ///////////////////////////
 
     // Scanning bottom clues
     for (auto bottomClueIndex = 0; bottomClueIndex < size; bottomClueIndex++)
@@ -174,27 +134,11 @@ bool GridSolver::checkIfIsASolution(QVector<QVector<int>> gridState) const
             matchingConfiguration.push_back(gridState[size - 1 - rowIndex][bottomClueIndex]);
         }
 
-        //////////////////////////
-        QMessageLogger logger;
-        QString message;
-        message.append(QString::number(currentClue));
-        message.append(" | ");
-        for (auto it = matchingConfiguration.begin(); it != matchingConfiguration.end(); it++)
-        {
-            message.append(QString::number(*it));
-        }
-        logger.debug(message.toUtf8());
-        //////////////////////////
-
         if ( ! checkIfGoodConfiguration(currentClue, matchingConfiguration) )
         {
             return false;
         }
     }
-
-    ///////////////////////////
-    logger.debug("Left clues");
-    ///////////////////////////
 
     // Scanning left clues
     for (auto leftClueIndex = 0; leftClueIndex < size; leftClueIndex++)
@@ -210,27 +154,11 @@ bool GridSolver::checkIfIsASolution(QVector<QVector<int>> gridState) const
             matchingConfiguration.push_back(gridState[leftClueIndex][colIndex]);
         }
 
-        //////////////////////////
-        QMessageLogger logger;
-        QString message;
-        message.append(QString::number(currentClue));
-        message.append(" | ");
-        for (auto it = matchingConfiguration.begin(); it != matchingConfiguration.end(); it++)
-        {
-            message.append(QString::number(*it));
-        }
-        logger.debug(message.toUtf8());
-        //////////////////////////
-
         if ( ! checkIfGoodConfiguration(currentClue, matchingConfiguration) )
         {
             return false;
         }
     }
-
-    ///////////////////////////
-    logger.debug("Right clues");
-    ///////////////////////////
 
     // Scanning right clues
     for (auto rightClueIndex = 0 ; rightClueIndex < size; rightClueIndex++)
@@ -245,18 +173,6 @@ bool GridSolver::checkIfIsASolution(QVector<QVector<int>> gridState) const
         {
             matchingConfiguration.push_back(gridState[rightClueIndex][size - 1 -colIndex]);
         }
-
-        //////////////////////////
-        QMessageLogger logger;
-        QString message;
-        message.append(QString::number(currentClue));
-        message.append(" | ");
-        for (auto it = matchingConfiguration.begin(); it != matchingConfiguration.end(); it++)
-        {
-            message.append(QString::number(*it));
-        }
-        logger.debug(message.toUtf8());
-        //////////////////////////
 
         if ( ! checkIfGoodConfiguration(currentClue, matchingConfiguration) )
         {

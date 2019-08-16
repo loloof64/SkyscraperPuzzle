@@ -19,6 +19,7 @@ public:
 
 private slots:
     void configureSolverGrid4x4();
+    void configureSolverGrid5x5();
 
 private:
     Ui::MainWindow *ui;

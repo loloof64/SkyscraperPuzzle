@@ -33,6 +33,7 @@
      <string>Solve</string>
     </property>
     <addaction name="actionGrid_4x4"/>
+    <addaction name="actionGrid_5x5"/>
    </widget>
    <addaction name="menuJouer"/>
    <addaction name="menuSolve"/>
@@ -40,6 +41,11 @@
   <action name="actionGrid_4x4">
    <property name="text">
     <string>Grid 4x4</string>
+   </property>
+  </action>
+  <action name="actionGrid_5x5">
+   <property name="text">
+    <string>Grid 5x5</string>
    </property>
   </action>
  </widget>
