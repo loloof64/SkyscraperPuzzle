@@ -129,6 +129,9 @@ bool GridSolver::checkIfIsASolution(QVector<QVector<int>> gridState) const
     {
         auto currentClue = topClues[topClueIndex];
 
+        bool weMustSkipClue = currentClue == 0;
+        if (weMustSkipClue) continue;
+
         auto matchingConfiguration = QVector<int>();
         for (auto rowIndex = 0; rowIndex < size; rowIndex++)
         {
@@ -161,6 +164,9 @@ bool GridSolver::checkIfIsASolution(QVector<QVector<int>> gridState) const
     for (auto bottomClueIndex = 0; bottomClueIndex < size; bottomClueIndex++)
     {
         auto currentClue = bottomClues[bottomClueIndex];
+
+        bool weMustSkipClue = currentClue == 0;
+        if (weMustSkipClue) continue;
 
         auto matchingConfiguration = QVector<int>();
         for (auto rowIndex = 0; rowIndex < size; rowIndex++)
@@ -195,6 +201,9 @@ bool GridSolver::checkIfIsASolution(QVector<QVector<int>> gridState) const
     {
         auto currentClue = leftClues[leftClueIndex];
 
+        bool weMustSkipClue = currentClue == 0;
+        if (weMustSkipClue) continue;
+
         auto matchingConfiguration = QVector<int>();
         for (auto colIndex = 0; colIndex < size; colIndex++)
         {
@@ -227,6 +236,9 @@ bool GridSolver::checkIfIsASolution(QVector<QVector<int>> gridState) const
     for (auto rightClueIndex = 0 ; rightClueIndex < size; rightClueIndex++)
     {
         auto currentClue = rightClues[rightClueIndex];
+
+        bool weMustSkipClue = currentClue == 0;
+        if (weMustSkipClue) continue;
 
         auto matchingConfiguration = QVector<int>();
         for (auto colIndex = 0; colIndex < size; colIndex++)
