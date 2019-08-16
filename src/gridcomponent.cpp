@@ -241,14 +241,20 @@ void GridComponent::solve()
         this->getDigitsFromCells(this->rightCluesCells)
     );
 
-    bool success = this->solver->solve();
-    if ( ! success )
+    auto solutions = this->solver->solve();
+    if ( solutions.size() == 0 )
     {
-        QMessageBox::critical(this->parentWidget(), tr("Failure"), tr("Failed to solve the grid."));
+        QMessageBox::critical(this->parentWidget(), tr("Failure"), tr("No solution."));
+    }
+    else if (solutions.size() > 1)
+    {
+        QString message;
+        message.sprintf(tr("Several solutions (%d).").toUtf8(), solutions.size());
+        QMessageBox::critical(this->parentWidget(), tr("Failure"), message);
     }
     else
     {
-        auto values = this->solver->getValues();
+        auto values = solutions[0];
         for (auto rowIt = values.begin(); rowIt != values.end(); rowIt++)
         {
             auto rowIndex = static_cast<int>(rowIt - values.begin());

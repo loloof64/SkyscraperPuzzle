@@ -16,8 +16,8 @@ public:
             QVector<int> leftClues,
             QVector<int> rightClues
     );
-    bool solve();
-    QVector<QVector<int>> getValues() const;
+
+    QVector<QVector<QVector<int>>> solve();
 
 private:
     int size = 0;
@@ -25,20 +25,14 @@ private:
     QVector<int> bottomClues;
     QVector<int> leftClues;
     QVector<int> rightClues;
-    QVector<QVector<QSet<int>>> internalClues;
+    QVector<QVector<QVector<int>>> currentSolutions;
 
-    void resetInternalClues();
-    bool reduceInternalCluesAndReturnIfChanged();
-    bool gridCompletelyReduced();
-
-    bool updateInternalCluesAndReturnIfChanged();
-    bool reduceCluesFromRowsAndColumnsAndReturnIfChanged();
-    bool findMaximumsAndReturnIfChanged();
-    bool reduceByVisibilityAndReturnIfChanged();
-
-    bool testReductionApplicationInLineConfigurationByVisibilityAndReturnIfGood(int visibilityTarget, int testIndexInConfiguration,
-                                                             int testDigit, QVector<QSet<int>> configuration);
-    bool reduceLineConfigurationAndReturnIfChanged(int visibilityTarget, QVector<QSet<int>> &lineConfigurationToReduce);
+    QVector<QVector<int>> getEmptyGridState();
+    void solveIteration(QVector<QVector<int>> gridState, int globalCellIndex = 0);
+    bool checkIfDigitAlreadyInLineOrColumn(QVector<QVector<int>> const &gridState,
+                                    int digitToTest, int rowIndex, int colIndex) const;
+    bool checkIfIsASolution(QVector<QVector<int>> gridState) const;
+    bool checkIfGoodConfiguration(int expectedVisiblesBuildings, QVector<int> configuration) const;
 };
 
 #endif // GRIDSOLVER_H
